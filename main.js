@@ -58,12 +58,13 @@ export async function  tambahPembeli(no, no handphone, nominal isi, harga) {
       nominal isi: nominal isi,
       harga: harga,
     });
-    console.log('Berhasil menambah pembeli' + dokRef.id);
+    console.log('berhasil menambah pembeli' + dokRef.id);
   } catch (e) {
-    console.log('Gagal menambah pembeli' + e);
-  }
+    console.log('gagal menambah pembeli' + e);
    }
-   
+}
+
+
    export async function hapusPenjual(docId) {
   await deleteDoc(doc(db, "pembeli", docId));
 }

@@ -11,64 +11,153 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
-<body>
-  <h1>Daftar penjualan pulsa</h1>
+    </style>
+    <header>
+        <img src="gambar.png" alt="Gambar Header" />
+    </header>
 
-  <table class="table" id="daftar-penjual">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">nomor</th>
-        <th scope="col">no handphone</th>
-        <th scope="col">nominal isi</th>
-        <th scope="col">harga</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+  <body class="m-3">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        tambah
+      </button>
+      <ul class="dropdown-menu dropdown-menu-dark">
+        <li><a class="dropdown-item active" href="form-pkl.html">tambah data</a></a></li>
+    </div>
 
-  <img src="loader.gif" style="width: 15em; display: block" id="loader">
+    <h1>kasir</h1>
 
-  <a href=" form data-pembeli.html">tambah data pembeli</a>
 
-  <script type="module">
-    import { ambilDaftarPenjual, formatAngka, hapusPenjual } from './main.js';
 
-    $(document).ready(async function() {
-      let elemenDaftar = $("#daftar-penjual > tbody");
-      let daftarPenjual = await ambilDaftarPembeli();
-      let nomor = 1;
+    <table class="table" id="pemasukan">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">no</th>
+          <th scope="col">no handphone</th>
+          <th scope="col">nominal isir</th>
+          <th scope="col">harga</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        </thead>
+            <tbody>
+                <tr>
+                 <td>No</td>
+                    <td>01</td>
+                    <td><input type="number" min="0" placeholder="0"></td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>No handphone</td>
+                    <td>085783726</td>
+                    <td><input type="number" min="0" placeholder="0"></td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Nominal isi</td>
+                    <td>60.000</td>
+                    <td><input type="number" min="0" placeholder="0"></td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Harga</td>
+                    <td>12.000</td>
+                    <td><input type="number" min="0" placeholder="0"></td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
 
-      daftarPenjual.forEach((data) => {
-        elemenDaftar.append(
-          '<tr>' +
-          '<th>' + nomor + '</th>' +
-          '<td>' + data.nominal isi + '</td>' +
-          '<td>' + data.harga + '</td>' +
-          data.id +
-          '">ubah</a> ' +
-          ' <button class="btn btn-danger tombol-hapus" data="' +
-          data.id +
-          '">Hapus</button>' + '</td>' +
-          '</tr>'
-        );
-        nomor = nomor + 1;
+    <div class="d-flex justify-content-center">
+      <img src="loader.gif" style="width: 1em; display: block" id="loader">
+    </div>
+
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tr:hover {
+        background-color: #f5f5f5;
+      }
+
+      .stack-up {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+    </style>
+
+
+    <script type="module">
+      import { ambilDaftarpemasukan, ubahpembeli, hapuspemasukan } from './main.js';
+
+      $(document).ready(async function() {
+        let elemenDaftar = $("#pemasukan > tbody");
+        let daftarpemasukan = await ambilDaftarpemasukan();
+        let nomor = 1;
+
+        daftarpemasukan.forEach((data) => {
+          elemenDaftar.append(
+            '<tr>' +
+            '<th>' + nomor + '</th>' +
+            '<td>' + data.no + '</td>' +
+            '<td>' + data.no handphone + '</td>' +
+            '<td>' + data.nominal isi + '</td>' +
+            '<td>' + data.harga + '</td>' +
+            '<td class="stack-up">' +
+            ' <a href="#" class="btn btn-warning link-ubah"  data="' +
+            data.id +
+            '">ubah</a> ' +
+            ' <button class="btn btn-danger tombol-hapus" data="' +
+            data.id +
+            '">Hapus</button>' + '</td>' +
+            '</tr>'
+          );
+          nomor = nomor + 1;
+        });
+
+        $('.tombol-hapus').click(async function() {
+          await hapuspembeli($(this).attr('data'));
+          location.reload();
+        })
+
+        $('.link-ubah').click(async function() {
+          window.location.replace('ubah-pkl.html?docId=' + $(this).attr('data'));
+        })
+
+        $('#loader').hide();
+
+
+
       });
-      $('#loader').hidel
+    </script>
 
-      $('.tombol-hapus').click(async function() {
-        $(this).attr('disabled', 'disabled');
-        $('#' + $(this).attr('data')).show();
-        await hapusPembeli($(this).attr('data'));
-        location.reload();
-      })
-      $('.link-ubah').click(async function() {
-        window.location.replace('ubah-pembeli.html?docId=' + $(this).attr('data'));
+    <footer class="py-3 bg-dark-subtle mt-auto">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
 
-    });
-  </script>
+      </ul>
+      <p class="text-center text-body-secondary">&copy; SMK PLUS INSAN CEMERLANG 2024
+        # 2 putri cell#</p>
+    </footer>
 
-</body>
+  </body>
 
 </html>
